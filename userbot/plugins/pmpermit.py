@@ -12,15 +12,9 @@ PREV_REPLY_MESSAGE = {}
 
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Set ALIVE_NAME in config vars in Heroku"
-CUSTOM_MIDDLE_PMP = str(CUSTOM_PMPERMIT) if CUSTOM_PMPERMIT else "**YOU HAVE TRESPASSED TO MY MASTERS INBOX** \n`THIS IS ILLEGAL AND REGARDED AS A CRIME`"
-USER_BOT_WARN_ZERO = "`You were spamming my peru master's inbox, henceforth your retarded lame ass has been blocked by my master's userbot.` "
-USER_BOT_NO_WARN = ("    ╭━━━━━━━╮ \n┃       ● ══    ┃ \n┃███████┃ \n┃███████┃ \n┃███████┃ \n┃███████┃ \n┃███████┃ \n┃███████┃ \n┃███████┃ \n┃███████┃ \n┃        🄾        ┃ \n╰━━━━━━━╯\n\n" 
-                    "`Hello ! This is` **F.R.I.D.A.Y**\n"
-                    "`Private Messaging Security Protocol ⚠️`\n\n"
-                    "**You Have Trespassed To My Boss\n"
-                    f"{DEFAULTUSER}'s Inbox**\n\n"
-                    f"{CUSTOM_MIDDLE_PMP} 🔥\n\n"
-                    "**Now You Are In Trouble So Send** 🔥 `/start` 🔥  **To Start A Valid Conversation!!**")
+CUSTOM_MIDDLE_PMP = str(CUSTOM_PMPERMIT) if CUSTOM_PMPERMIT else "In questo momento sono occupato. Appena sono online su Telegram ti risponderò."
+USER_BOT_WARN_ZERO = "Ultimo avvertimento, stai per essere bloccato/a. Aspetta che torni online."
+USER_BOT_NO_WARN = ("Ciao, questa è una risposta automatica. Al prossimo messaggio vieni automaticamente bloccato per evitare l'intasamento delle notifiche.")
 
 
 if Var.PRIVATE_GROUP_ID is not None:
@@ -40,7 +34,7 @@ if Var.PRIVATE_GROUP_ID is not None:
                     await PREV_REPLY_MESSAGE[chat.id].delete()
                     del PREV_REPLY_MESSAGE[chat.id]
                 pmpermit_sql.approve(chat.id, reason)
-                await event.edit("Approved to pm [{}](tg://user?id={})".format(firstname, chat.id))
+                await event.edit("Approvato [{}](tg://user?id={})".format(firstname, chat.id))
                 await asyncio.sleep(3)
                 await event.delete()
 
@@ -60,7 +54,7 @@ if Var.PRIVATE_GROUP_ID is not None:
           else:
             if pmpermit_sql.is_approved(chat.id):
                 pmpermit_sql.disapprove(chat.id)
-                await event.edit(" ███████▄▄███████████▄  \n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓███░░░░░░░░░░░░█\n██████▀▀▀█░░░░██████▀  \n░░░░░░░░░█░░░░█  \n░░░░░░░░░░█░░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░░▀▀ \n\n**This is Friday AI..U HAVE BEEN BANNED DUE TO BAKCHODI**..[{}](tg://user?id={})".format(firstname, chat.id))
+                await event.edit(" ███████▄▄███████████▄  \n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n▓▓▓▓▓▓███░░░░░░░░░░░░█\n██████▀▀▀█░░░░██████▀  \n░░░░░░░░░█░░░░█  \n░░░░░░░░░░█░░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░█░░█  \n░░░░░░░░░░░░▀▀ \n\n**This is Jerry AI..U HAVE BEEN BANNED DUE TO BAKCHODI**..[{}](tg://user?id={})".format(firstname, chat.id))
                 await asyncio.sleep(3)
                 await event.client(functions.contacts.BlockRequest(chat.id))
 
@@ -74,11 +68,11 @@ if Var.PRIVATE_GROUP_ID is not None:
         chat = await event.get_chat()
         if event.is_private:
           if chat.id == 813878981:
-            await event.edit("Sorry, I Can't Disapprove My Master")
+            await event.edit("Non posso")
           else:
             if pmpermit_sql.is_approved(chat.id):
                 pmpermit_sql.disapprove(chat.id)
-                await event.edit("Disapproved [{}](tg://user?id={})".format(firstname, chat.id))
+                await event.edit("Disapprovato [{}](tg://user?id={})".format(firstname, chat.id))
                 
     
 
@@ -104,7 +98,7 @@ if Var.PRIVATE_GROUP_ID is not None:
                     out_file,
                     force_document=True,
                     allow_cache=False,
-                    caption="Current Approved PMs",
+                    caption="Già approvato",
                     reply_to=event
                 )
                 await event.delete()
@@ -203,6 +197,6 @@ async def hehehe(event):
     chat = await event.get_chat()
     if event.is_private:
         if not pmpermit_sql.is_approved(chat.id):
-            pmpermit_sql.approve(chat.id, "**My Boss Is Best🔥**")
-            await borg.send_message(chat, "**Boss Meet My Creator**")
+            pmpermit_sql.approve(chat.id, "**wow🔥**")
+            await borg.send_message(chat, "**xd lol**")
            
